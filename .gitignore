@@ -102,3 +102,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# P1 environment files
+p1_navigation/Banana*
