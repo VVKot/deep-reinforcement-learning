@@ -53,8 +53,9 @@ class Agent():
     
     def step(self, state, action, reward, next_state, done):
         """Save experience in replay memory, and use random sample from buffer to learn."""
-        # Save experience / reward
-        self.memory.add(state, action, reward, next_state, done)
+        # Save experience / reward tuples
+        for experience in zip(state, action, reward, next_state, done):
+            self.memory.add(experience)
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE:
@@ -167,8 +168,9 @@ class ReplayBuffer:
         self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
         self.seed = random.seed(seed)
     
-    def add(self, state, action, reward, next_state, done):
+    def add(self, experience):
         """Add a new experience to memory."""
+        state, action, reward, next_state, done = experience
         e = self.experience(state, action, reward, next_state, done)
         self.memory.append(e)
     
