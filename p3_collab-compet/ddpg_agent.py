@@ -184,9 +184,8 @@ class ReplayBuffer:
                                      "state", "action", "reward", "next_state", "done"])
         self.seed = random.seed(seed)
 
-    def add(self, experience):
+    def add(self, state, action, reward, next_state, done):
         """Add a new experience to memory."""
-        state, action, reward, next_state, done = experience
         e = self.experience(state, action, reward, next_state, done)
         self.memory.append(e)
 
